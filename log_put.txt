@@ -1,1 +1,0 @@
-{"player":"john","badge":"rookie_sniper"}
