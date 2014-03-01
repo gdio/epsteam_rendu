@@ -6,13 +6,19 @@
 		
 		<title>EPSTEAM</title>
 		<style type="text/css" title="currentStyle">
+			@import "./media/css/dataTables.tableTools.css";
 			@import "./media/css/demo_page.css";
 			@import "./media/css/jquery.dataTables_themeroller.css";
 			@import "./media/themes/custom_themes/jquery-ui.css";
+			
+
 		</style>
 		<script type="text/javascript" language="javascript" src="./media/js/jquery.js"></script>
 		<script type="text/javascript" language="javascript" src="./media/js/jquery.dataTables.js"></script>
 		<script type="text/javascript" language="javascript" src="./media/js/custom_function.js"></script>
+		<script type="text/javascript" language="javascript" src="./media/js/dataTables.tableTools.js"></script>
+
+		
 		<script type="text/javascript" charset="utf-8">
 			$(document).ready(function() {
 				var oTable = $('#example').dataTable( {
@@ -24,14 +30,22 @@
 					"aoColumns" : [
                        { "mData": "player" },
                        { "mData": "game" },
-                       { "mData": "badge" }
-                   ]
+                       { "mData": "badge" },
+                       { "mData": "date"}
+                   ],
+                   "sDom": '<"H"lfr>T<"F"ip>',
+                   "oTableTools": {
+						"sSwfPath": "media/swf/copy_csv_xls_pdf.swf",
+						"aButtons": [ "copy", "csv","xls","pdf" ]
+					}
+
+                   
 				} );
 
 				var autotimer = true;
 				var autorefresh = setInterval( function () {
 					oTable.fnReloadAjax('./select.php');
-				}, 20000 );
+				}, 15000 );
 
 				$("#refresh_button").click(function(){
 					if(autotimer == true)
@@ -47,7 +61,7 @@
 				        autotimer = true;
 				        autorefresh = setInterval( function () {
 				                    oTable.fnReloadAjax('./select.php');
-				        }, 20000 );
+				        }, 15000 );
 				    }
 				})
 
@@ -63,14 +77,15 @@
 			
 			
 			
-			<h1>Players stats <img id="refresh_button" src="./media/images/refresh_on.png" style="cursor: pointer; vertical-align:middle"/></h1>
+			<h1>Players stats <span style='float:right'>| Refresh auto:<img id="refresh_button" src="./media/images/refresh_on.png" style="cursor: pointer; vertical-align:middle"/></span></h1>
 			<div id="demo">
-<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%">
+<table cellpadding="0" cellspacing="0" border="0" class="display" id="example" width="100%" style="text-align:center; text-transform: capitalize;">
 	<thead>
 	<tr>
 	<th>Player</th>
 	<th>Game</th>
 	<th>Badge</th>
+	<th>Awarded</th>
 </tr>
 </thead>
 <tfoot>
@@ -78,514 +93,12 @@
 	<th>Player</th>
 	<th>Game</th>
 	<th>Badge</th>
+	<th>Awarded</th>
 </tr>
 </tfoot>
-<!--<tr>
-	<td>Wynne</td>
-	<td>red</td>
-	<td>magna.</td>
-</tr>
-<tr>
-	<td>Amethyst</td>
-	<td>yellow</td>
-	<td>Curabitur</td>
-</tr>
-<tr>
-	<td>Myra</td>
-	<td>yellow</td>
-	<td>tellus</td>
-</tr>
-<tr>
-	<td>Nora</td>
-	<td>blue</td>
-	<td>magna.</td>
-</tr>
-<tr>
-	<td>Dalton</td>
-	<td>red</td>
-	<td>Quisque</td>
-</tr>
-<tr>
-	<td>Roary</td>
-	<td>violet</td>
-	<td>penatibus</td>
-</tr>
-<tr>
-	<td>Caldwell</td>
-	<td>green</td>
-	<td>Nunc</td>
-</tr>
-<tr>
-	<td>Calvin</td>
-	<td>orange</td>
-	<td>eu,</td>
-</tr>
-<tr>
-	<td>Gretchen</td>
-	<td>green</td>
-	<td>sed</td>
-</tr>
-<tr>
-	<td>Molly</td>
-	<td>red</td>
-	<td>eu</td>
-</tr>
-<tr>
-	<td>Lee</td>
-	<td>red</td>
-	<td>at</td>
-</tr>
-<tr>
-	<td>Lynn</td>
-	<td>orange</td>
-	<td>Cum</td>
-</tr>
-<tr>
-	<td>Chase</td>
-	<td>yellow</td>
-	<td>libero.</td>
-</tr>
-<tr>
-	<td>Anika</td>
-	<td>green</td>
-	<td>lacus.</td>
-</tr>
-<tr>
-	<td>Dacey</td>
-	<td>green</td>
-	<td>nec</td>
-</tr>
-<tr>
-	<td>Reuben</td>
-	<td>violet</td>
-	<td>vel</td>
-</tr>
-<tr>
-	<td>Ezekiel</td>
-	<td>violet</td>
-	<td>ultricies</td>
-</tr>
-<tr>
-	<td>Leslie</td>
-	<td>indigo</td>
-	<td>ornare</td>
-</tr>
-<tr>
-	<td>Hop</td>
-	<td>indigo</td>
-	<td>semper.</td>
-</tr>
-<tr>
-	<td>Fuller</td>
-	<td>violet</td>
-	<td>vitae</td>
-</tr>
-<tr>
-	<td>Hedwig</td>
-	<td>green</td>
-	<td>Nunc</td>
-</tr>
-<tr>
-	<td>Galvin</td>
-	<td>violet</td>
-	<td>natoque</td>
-</tr>
-<tr>
-	<td>Randall</td>
-	<td>red</td>
-	<td>Donec</td>
-</tr>
-<tr>
-	<td>Kasper</td>
-	<td>yellow</td>
-	<td>dolor</td>
-</tr>
-<tr>
-	<td>Lev</td>
-	<td>red</td>
-	<td>auctor</td>
-</tr>
-<tr>
-	<td>Baxter</td>
-	<td>green</td>
-	<td>Aliquam</td>
-</tr>
-<tr>
-	<td>Brenna</td>
-	<td>violet</td>
-	<td>Curabitur</td>
-</tr>
-<tr>
-	<td>Quamar</td>
-	<td>orange</td>
-	<td>parturient</td>
-</tr>
-<tr>
-	<td>Melanie</td>
-	<td>indigo</td>
-	<td>sapien.</td>
-</tr>
-<tr>
-	<td>Whoopi</td>
-	<td>violet</td>
-	<td>imperdiet</td>
-</tr>
-<tr>
-	<td>Daria</td>
-	<td>green</td>
-	<td>turpis.</td>
-</tr>
-<tr>
-	<td>Benedict</td>
-	<td>indigo</td>
-	<td>Vivamus</td>
-</tr>
-<tr>
-	<td>Rigel</td>
-	<td>orange</td>
-	<td>lacus.</td>
-</tr>
-<tr>
-	<td>Claire</td>
-	<td>blue</td>
-	<td>velit</td>
-</tr>
-<tr>
-	<td>Micah</td>
-	<td>green</td>
-	<td>dolor</td>
-</tr>
-<tr>
-	<td>Ifeoma</td>
-	<td>violet</td>
-	<td>Nullam</td>
-</tr>
-<tr>
-	<td>George</td>
-	<td>red</td>
-	<td>gravida</td>
-</tr>
-<tr>
-	<td>Linda</td>
-	<td>yellow</td>
-	<td>quam.</td>
-</tr>
-<tr>
-	<td>Hadassah</td>
-	<td>yellow</td>
-	<td>et,</td>
-</tr>
-<tr>
-	<td>Xander</td>
-	<td>orange</td>
-	<td>mauris,</td>
-</tr>
-<tr>
-	<td>Ryan</td>
-	<td>indigo</td>
-	<td>lorem</td>
-</tr>
-<tr>
-	<td>Molly</td>
-	<td>orange</td>
-	<td>in,</td>
-</tr>
-<tr>
-	<td>Hayden</td>
-	<td>red</td>
-	<td>egestas.</td>
-</tr>
-<tr>
-	<td>Chava</td>
-	<td>blue</td>
-	<td>Nulla</td>
-</tr>
-<tr>
-	<td>Abraham</td>
-	<td>orange</td>
-	<td>Duis</td>
-</tr>
-<tr>
-	<td>Hilel</td>
-	<td>red</td>
-	<td>lacus.</td>
-</tr>
-<tr>
-	<td>Hamilton</td>
-	<td>orange</td>
-	<td>arcu.</td>
-</tr>
-<tr>
-	<td>Sage</td>
-	<td>orange</td>
-	<td>ligula</td>
-</tr>
-<tr>
-	<td>Hadassah</td>
-	<td>green</td>
-	<td>urna</td>
-</tr>
-<tr>
-	<td>Norman</td>
-	<td>yellow</td>
-	<td>felis</td>
-</tr>
-<tr>
-	<td>Imelda</td>
-	<td>red</td>
-	<td>Pellentesque</td>
-</tr>
-<tr>
-	<td>Dexter</td>
-	<td>blue</td>
-	<td>metus</td>
-</tr>
-<tr>
-	<td>Virginia</td>
-	<td>yellow</td>
-	<td>eu</td>
-</tr>
-<tr>
-	<td>Felix</td>
-	<td>blue</td>
-	<td>lacus.</td>
-</tr>
-<tr>
-	<td>Adam</td>
-	<td>violet</td>
-	<td>in,</td>
-</tr>
-<tr>
-	<td>Echo</td>
-	<td>orange</td>
-	<td>sagittis</td>
-</tr>
-<tr>
-	<td>Ivana</td>
-	<td>indigo</td>
-	<td>consectetuer</td>
-</tr>
-<tr>
-	<td>Daryl</td>
-	<td>yellow</td>
-	<td>neque</td>
-</tr>
-<tr>
-	<td>Lydia</td>
-	<td>red</td>
-	<td>sapien.</td>
-</tr>
-<tr>
-	<td>Neil</td>
-	<td>indigo</td>
-	<td>Integer</td>
-</tr>
-<tr>
-	<td>Cadman</td>
-	<td>blue</td>
-	<td>Lorem</td>
-</tr>
-<tr>
-	<td>Miriam</td>
-	<td>orange</td>
-	<td>vitae</td>
-</tr>
-<tr>
-	<td>Clark</td>
-	<td>green</td>
-	<td>consectetuer</td>
-</tr>
-<tr>
-	<td>Karyn</td>
-	<td>red</td>
-	<td>egestas</td>
-</tr>
-<tr>
-	<td>Willow</td>
-	<td>red</td>
-	<td>Suspendisse</td>
-</tr>
-<tr>
-	<td>Olga</td>
-	<td>red</td>
-	<td>vitae</td>
-</tr>
-<tr>
-	<td>Avye</td>
-	<td>blue</td>
-	<td>sem.</td>
-</tr>
-<tr>
-	<td>Yoko</td>
-	<td>yellow</td>
-	<td>elit,</td>
-</tr>
-<tr>
-	<td>Bertha</td>
-	<td>green</td>
-	<td>ut</td>
-</tr>
-<tr>
-	<td>Leslie</td>
-	<td>violet</td>
-	<td>congue</td>
-</tr>
-<tr>
-	<td>Xyla</td>
-	<td>violet</td>
-	<td>convallis</td>
-</tr>
-<tr>
-	<td>Remedios</td>
-	<td>yellow</td>
-	<td>pellentesque,</td>
-</tr>
-<tr>
-	<td>Connor</td>
-	<td>indigo</td>
-	<td>auctor,</td>
-</tr>
-<tr>
-	<td>Damian</td>
-	<td>red</td>
-	<td>rutrum</td>
-</tr>
-<tr>
-	<td>Kiara</td>
-	<td>green</td>
-	<td>non</td>
-</tr>
-<tr>
-	<td>Lawrence</td>
-	<td>indigo</td>
-	<td>sit</td>
-</tr>
-<tr>
-	<td>May</td>
-	<td>green</td>
-	<td>mauris</td>
-</tr>
-<tr>
-	<td>Ifeoma</td>
-	<td>indigo</td>
-	<td>Mauris</td>
-</tr>
-<tr>
-	<td>Kevyn</td>
-	<td>indigo</td>
-	<td>lacus.</td>
-</tr>
-<tr>
-	<td>Acton</td>
-	<td>red</td>
-	<td>turpis.</td>
-</tr>
-<tr>
-	<td>Aiko</td>
-	<td>green</td>
-	<td>vehicula</td>
-</tr>
-<tr>
-	<td>Athena</td>
-	<td>blue</td>
-	<td>diam.</td>
-</tr>
-<tr>
-	<td>Eagan</td>
-	<td>blue</td>
-	<td>ante.</td>
-</tr>
-<tr>
-	<td>Lester</td>
-	<td>red</td>
-	<td>taciti</td>
-</tr>
-<tr>
-	<td>Leroy</td>
-	<td>green</td>
-	<td>vulputate,</td>
-</tr>
-<tr>
-	<td>Gail</td>
-	<td>violet</td>
-	<td>ornare.</td>
-</tr>
-<tr>
-	<td>Kyla</td>
-	<td>blue</td>
-	<td>Vestibulum</td>
-</tr>
-<tr>
-	<td>Wayne</td>
-	<td>violet</td>
-	<td>vehicula</td>
-</tr>
-<tr>
-	<td>Clarke</td>
-	<td>yellow</td>
-	<td>ultricies</td>
-</tr>
-<tr>
-	<td>Elaine</td>
-	<td>green</td>
-	<td>sit</td>
-</tr>
-<tr>
-	<td>Declan</td>
-	<td>indigo</td>
-	<td>erat</td>
-</tr>
-<tr>
-	<td>Steel</td>
-	<td>green</td>
-	<td>Suspendisse</td>
-</tr>
-<tr>
-	<td>Josephine</td>
-	<td>red</td>
-	<td>erat</td>
-</tr>
-<tr>
-	<td>Aretha</td>
-	<td>indigo</td>
-	<td>nisl</td>
-</tr>
-<tr>
-	<td>Tara</td>
-	<td>blue</td>
-	<td>scelerisque</td>
-</tr>
-<tr>
-	<td>Gil</td>
-	<td>yellow</td>
-	<td>Lorem</td>
-</tr>
-<tr>
-	<td>Isaac</td>
-	<td>blue</td>
-	<td>faucibus</td>
-</tr>
-<tr>
-	<td>Noelani</td>
-	<td>green</td>
-	<td>sit</td>
-</tr>
-<tr>
-	<td>Halla</td>
-	<td>red</td>
-	<td>massa.</td>
-</tr>
-<tr>
-	<td>Yetta</td>
-	<td>yellow</td>
-	<td>Morbi</td>
-</tr>-->
 </table>
 
 			</div>
-			
-			
-			
 		</div>
 	</body>
 </html>

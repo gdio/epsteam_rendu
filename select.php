@@ -5,7 +5,7 @@ try {
     // connect to test database
     $db = $conn->test;
 	//collection name
-   $collection = $db->api;
+    $collection = $db->api;
     // récuperer le contenu de la collection
     $cursor = $collection->find();
     $i = 0;
@@ -21,17 +21,17 @@ try {
                 "aaData": [';
         foreach ($cursor as $obj)
         {
-            //Ici on traite l'objet récupéré de la bdd pour avoir un jolie json valide ! 
+            //Ici on traite l'objet récupéré de la bdd pour avoir un jolie json valide et rajouter la colone game qui est stocké à part ! 
             $string = json_encode($obj);
             $arrayofString = explode(',',$string);
             
             if($i == $num_docs-1)
             {
-              echo substr(stripslashes($arrayofString[1]).','.substr(stripslashes($arrayofString[2]),0,-4),1,-1).",\"game\":\"".$obj['0']."\"}";
+              echo substr(stripslashes($arrayofString[1]).','.substr(stripslashes($arrayofString[2]),0,-4),1,-1).",\"game\":\"".$obj['0']."\",\"date\":\"".$obj['1']."\"}";
             }
             else
             {
-                echo substr(stripslashes($arrayofString[1]).','.substr(stripslashes($arrayofString[2]),0,-4),1,-1).",\"game\":\"".$obj['0']."\"},";
+                echo substr(stripslashes($arrayofString[1]).','.substr(stripslashes($arrayofString[2]),0,-4),1,-1).",\"game\":\"".$obj['0']."\",\"date\":\"".$obj['1']."\"},";
             }
             $i++;
         }

@@ -1,19 +1,10 @@
 <?php
 $post_vars = [];
 
-if($_SERVER['REQUEST_METHOD'] == 'GET') {
-    echo "this is a get request\n";
-    //echo $_GET['player'];
-   /* $post_vars['player'] = $_GET['player'];
-    $post_vars['badge'] = $_GET['badge'];
-    $post_vars['game'] = $_GET['game'];*/
 
-    
-} elseif($_SERVER['REQUEST_METHOD'] == 'PUT') {
-    echo "this is a put request\n";
     parse_str(file_get_contents("php://input"),$post_vars);
     var_dump($post_vars);
-}
+
 
 try {
         if($post_vars!=null)
@@ -24,9 +15,14 @@ try {
             $db = $conn->test;
             // api collection 
             $collection = $db->api;
-            //We add game from url
+            //We add game from url and date from php
             $game = substr($_SERVER['PATH_INFO'],7);
+            date_default_timezone_set('Europe/Paris'); //Pour avoir l'heure de paris
+            $datetime = date("d-m-Y H:i:s");
+
+            //push
             array_push($post_vars, $game);
+            array_push($post_vars, $datetime);
             // valeurs à inserer 
             $scores = $post_vars;
             // insertion
